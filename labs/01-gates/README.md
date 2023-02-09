@@ -42,4 +42,4 @@ end architecture dataflow;
 
 2. Link to your public EDA Playground example:
 
-  First Distributive law: [distributive](https://www.edaplayground.com/x/p_gP)
+  First Distributive law: [https://www.edaplayground.com](https://www.edaplayground.com/x/p_gP)
