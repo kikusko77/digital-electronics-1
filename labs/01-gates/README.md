@@ -31,7 +31,7 @@ end architecture dataflow;
    | 1 | 1 | 1 | 0 | 0 | 0 |
 
 ### Distributive laws
-### First distributive law:
+ First distributive law:
 ![photo1](https://github.com/kikusko77/digital-electronics-1/blob/main/photos/distributive1.png)
 1. Screenshot with simulated time waveforms. Always display all inputs and outputs (display the inputs at the top of the image, the outputs below them) at the appropriate time scale!
 
