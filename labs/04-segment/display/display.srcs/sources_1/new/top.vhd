@@ -77,14 +77,38 @@ begin
 
 -- Turn LED(4) on if input value is equal to 0, ie "0000"
 -- LED(4) <= WRITE YOUR CODE HERE
-
+with SW select
+    LED(4) <= '1' when "0000",
+    '0' when others; 
 -- Turn LED(5) on if input value is greater than "1001", ie 10, 11, 12, ...
 -- LED(5) <= WRITE YOUR CODE HERE
-
+with SW select
+    LED(5) <= '1' when "1010",
+    '1' when "1011",
+    '1' when "1100",
+    '1' when "1101",
+    '1' when "1110",
+    '1' when "1111",
+    '0' when others;
 -- Turn LED(6) on if input value is odd, ie 1, 3, 5, ...
 -- LED(6) <= WRITE YOUR CODE HERE
-
+with SW select
+    LED(6) <= '1' when "0001",
+    '1' when "0011",
+    '1' when "0101",
+    '1' when "0111",
+    '1' when "1001",
+    '1' when "1011",
+    '1' when "1101",
+    '1' when "1111",
+    '0' when others;
 -- Turn LED(7) on if input value is a power of two, ie 1, 2, 4, or 8
 -- LED(7) <= WRITE YOUR CODE HERE
+with SW select
+    LED(7) <= '1' when "0001",
+    '1' when "0010",
+    '1' when "0100",
+    '1' when "1000",
+    '0' when others;
 
 end architecture behavioral;
