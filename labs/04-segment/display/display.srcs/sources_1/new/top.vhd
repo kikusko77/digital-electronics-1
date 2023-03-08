@@ -2,7 +2,7 @@
 -- Company: 
 -- Engineer: 
 -- 
--- Create Date: 02.03.2023 13:35:31
+-- Create Date: 03/01/2023 03:56:07 PM
 -- Design Name: 
 -- Module Name: top - Behavioral
 -- Project Name: 
@@ -45,11 +45,19 @@ entity top is
            BTNC : in STD_LOGIC);
 end top;
 
-architecture Behavioral of top is
+------------------------------------------------------------
+-- Architecture body for top level
+------------------------------------------------------------
+
+architecture behavioral of top is
 
 begin
 
-hex2seg : entity work.hex_7seg
+  --------------------------------------------------------------------
+  -- Instance (copy) of hex_7seg entity
+  --------------------------------------------------------------------
+
+  hex2seg : entity work.hex_7seg
     port map (
       blank  => BTNC,
       hex    => SW,
@@ -72,15 +80,29 @@ hex2seg : entity work.hex_7seg
 -- Experiments on your own: LED(7:4) indicators
 
 -- Turn LED(4) on if input value is equal to 0, ie "0000"
-LED(4) <= '1' when (SW = "0000") else '0';
 
--- Turn LED(5) on if input value is greater than "1001", ie 10, 11, 12, ...
-LED(5) <= '1' when (SW > "1001") else '0';
+  LED(4) <= '1' when (SW = "0000") else '0';
 
--- Turn LED(6) on if input value is odd, ie 1, 3, 5, ...
-LED(6) <= '1' when (SW = "0001" or SW = "0011" or SW = "0101" or SW = "0111" or SW = "1001" or SW = "1011" or SW = "1101" or SW = "1111") else '0';
+ -- Turn LED(5) on if input value is greater than "1001", ie 10, 11, 12, ...
+ 
+ LED(5) <= '1' when (SW > "1001") else '0';
 
--- Turn LED(7) on if input value is a power of two, ie 1, 2, 4, or 8
-LED(7) <= '1' when (SW = "0001" or SW = "0010" or SW = "0100" or SW = "1000") else '0';
+ -- Turn LED(6) on if input value is odd, ie 1, 3, 5, ...
+ 
+ LED(6) <= '1' when (SW = "0001") else  --1
+           '1' when (SW = "0011") else --3
+           '1' when (SW = "0101") else  --5
+           '1' when (SW = "0111") else  --7
+           '1' when (SW = "1001") else  --9
+           '1' when (SW = "1011") else  --11
+           '1' when (SW = "1101") else  --13
+           '1' when (SW = "1111") else '0'; --15
 
-end Behavioral;
+ -- Turn LED(7) on if input value is a power of two, ie 1, 2, 4, or 8
+
+ LED(7) <= '1' when (SW = "0001") else    --1
+             '1' when (SW = "0010") else  --2
+             '1' when (SW = "0100") else  --4
+             '1' when (SW = "1000") else '0'; --8
+
+end architecture behavioral;
