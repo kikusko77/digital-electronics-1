@@ -2,7 +2,7 @@
 -- Company: 
 -- Engineer: 
 -- 
--- Create Date: 03/16/2023 11:56:39 AM
+-- Create Date: 03/16/2023 12:01:09 PM
 -- Design Name: 
 -- Module Name: top - Behavioral
 -- Project Name: 
@@ -34,6 +34,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 entity top is
     Port ( CLK100MHZ : in STD_LOGIC;
            SW : in STD_LOGIC;
+           SW_12 : in std_logic;
            CA : out STD_LOGIC;
            CB : out STD_LOGIC;
            CC : out STD_LOGIC;
@@ -41,13 +42,17 @@ entity top is
            CE : out STD_LOGIC;
            CF : out STD_LOGIC;
            CG : out STD_LOGIC;
+           CH : out STD_LOGIC;
+           CI : out STD_LOGIC;
+           CJ : out STD_LOGIC;
+           CK : out STD_LOGIC;
+           CL : out STD_LOGIC;
+           CM : out STD_LOGIC;
+           CN : out STD_LOGIC;
            AN : out STD_LOGIC_VECTOR (7 downto 0);
+           AM : out STD_LOGIC_VECTOR (7 downto 0);
            BTNC : in STD_LOGIC);
 end top;
-
-----------------------------------------------------------
--- Architecture body for top level
-----------------------------------------------------------
 
 architecture behavioral of top is
 
@@ -55,6 +60,9 @@ architecture behavioral of top is
   signal sig_en_250ms : std_logic;                    --! Clock enable signal for Counter0
   signal sig_cnt_4bit : std_logic_vector(3 downto 0); --! Counter0
 
+  -- 12-bit counter @ 10 ms
+  signal sig_en_10ms : std_logic;                    --! Clock enable signal for Counter
+  signal sig_cnt_12bit : std_logic_vector(11 downto 0); --! Counter
 begin
 
   --------------------------------------------------------
@@ -65,7 +73,7 @@ begin
           g_MAX => 25000000
       )
       port map(
-           clk => CLK100MHZ,
+          clk => CLK100MHZ,
           rst => BTNC,
           ce  => sig_en_250ms
       );
@@ -74,16 +82,14 @@ begin
   -- Instance (copy) of cnt_up_down entity
   --------------------------------------------------------
   bin_cnt0 : entity work.cnt_up_down
-     generic map(
-          g_CNT_WIDTH=>4
+     generic map( g_CNT_WIDTH => 4
       )
       port map(
-       clk => CLK100MHZ,
-       rst => BTNC,
-       en  => sig_en_250ms,
-       cnt_up => SW,
-       cnt=> sig_cnt_4bit
-           
+          clk => CLK100MHZ,
+          rst => BTNC,
+          en => sig_en_250ms,
+          cnt_up => SW,
+          cnt => sig_cnt_4bit
       );
 
   --------------------------------------------------------
@@ -102,10 +108,45 @@ begin
           seg(0) => CG
       );
 
+
+--12 bit counter
+  clk_en12 : entity work.clock_enable
+      generic map(
+          g_MAX => 1000000
+      )
+      port map(
+          clk => CLK100MHZ,
+          rst => BTNC,
+          ce  => sig_en_10ms
+      );
+
+  bin_cnt12 : entity work.cnt_up_down_12
+     generic map( g_CNT_WIDTH => 12
+      )
+      port map(
+          clk => CLK100MHZ,
+          rst => BTNC,
+          en => sig_en_10ms,
+          cnt_up => SW_12,
+          cnt => sig_cnt_12bit
+      );
+
+  hex2seg_12 : entity work.hex_7seg_12
+      port map(
+          blank  => BTNC,
+          hex    => sig_cnt_12bit,
+          seg(6) => CH,
+          seg(5) => CI,
+          seg(4) => CJ,
+          seg(3) => CK,
+          seg(2) => CL,
+          seg(1) => CM,
+          seg(0) => CN
+      );
   --------------------------------------------------------
   -- Other settings
   --------------------------------------------------------
   -- Connect one common anode to 3.3V
   AN <= b"1111_1110";
-
+  AM <= b"1111_1110";
 end architecture behavioral;

@@ -24,9 +24,9 @@ library ieee;
 -- Entity declaration for N-bit counter
 ----------------------------------------------------------
 
-entity cnt_up_down is
+entity cnt_up_down_12 is
   generic (
-    g_CNT_WIDTH : natural := 4 --! Default number of counter bits
+    g_CNT_WIDTH : natural := 12 --! Default number of counter bits
   );
   port (
     clk    : in    std_logic; --! Main clock
@@ -35,13 +35,13 @@ entity cnt_up_down is
     cnt_up : in    std_logic; --! Direction of the counter (1 @ UP, 0 @ DOWN)
     cnt    : out   std_logic_vector(g_CNT_WIDTH - 1 downto 0) --! Counter value
   );
-end entity cnt_up_down;
+end entity cnt_up_down_12;
 
 ----------------------------------------------------------
 -- Architecture body for N-bit counter
 ----------------------------------------------------------
 
-architecture behavioral of cnt_up_down is
+architecture behavioral of cnt_up_down_12 is
 
   signal sig_cnt : unsigned(g_CNT_WIDTH - 1 downto 0) := (others => '0'); --! Local counter
 
@@ -52,7 +52,7 @@ begin
   -- Clocked process with synchronous reset which implements
   -- n-bit up/down counter.
   --------------------------------------------------------
-  p_cnt_up_down : process (clk) is
+  p_cnt_up_down_12 : process (clk) is
   begin
 
     if rising_edge(clk) then
@@ -68,7 +68,7 @@ begin
     end if;
     end if;
 
-  end process p_cnt_up_down;
+  end process p_cnt_up_down_12;
 
   -- Output must be retyped from "unsigned" to "std_logic_vector"
   cnt <= std_logic_vector(sig_cnt);
