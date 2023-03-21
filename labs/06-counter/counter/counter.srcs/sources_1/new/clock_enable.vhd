@@ -1,18 +1,23 @@
-----------------------------------------------------------
---
---! @title Clock enable
---! @author Tomas Fryza
---! Dept. of Radio Electronics, Brno Univ. of Technology, Czechia
---!
---! @copyright (c) 2019 Tomas Fryza
---! This work is licensed under the terms of the MIT license
---!
---! Generates clock enable signal according to the number
---! of clock pulses `g_MAX`.
---
--- Hardware: Nexys A7-50T, xc7a50ticsg324-1L
--- Software: TerosHDL, Vivado 2020.2, EDA Playground
---
+----------------------------------------------------------------------------------
+-- Company: 
+-- Engineer: 
+-- 
+-- Create Date: 03/15/2023 03:10:44 PM
+-- Design Name: 
+-- Module Name: clock_enable - Behavioral
+-- Project Name: 
+-- Target Devices: 
+-- Tool Versions: 
+-- Description: 
+-- 
+-- Dependencies: 
+-- 
+-- Revision:
+-- Revision 0.01 - File Created
+-- Additional Comments:
+-- 
+----------------------------------------------------------------------------------
+
 ----------------------------------------------------------
 
 library ieee;
@@ -71,3 +76,4 @@ begin
   end process p_clk_enable;
 
 end architecture behavioral;
+

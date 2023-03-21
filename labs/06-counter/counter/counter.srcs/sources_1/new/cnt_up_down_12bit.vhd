@@ -1,20 +1,22 @@
-----------------------------------------------------------
---
---! @title N-bit Up/Down binary counter
---! @author Tomas Fryza
---! Dept. of Radio Electronics, Brno Univ. of Technology, Czechia
---!
---! @copyright (c) 2019 Tomas Fryza
---! This work is licensed under the terms of the MIT license
---!
---! Implementation of bidirectional N-bit counter. Number
---! of bits is set by `g_CNT_WIDTH` and counting direction
---! by `cnt_up` input.
---
--- Hardware: Nexys A7-50T, xc7a50ticsg324-1L
--- Software: TerosHDL, Vivado 2020.2, EDA Playground
---
-----------------------------------------------------------
+----------------------------------------------------------------------------------
+-- Company: 
+-- Engineer: 
+-- 
+-- Create Date: 19.03.2023 17:12:59
+-- Design Name: 
+-- Module Name: cnt_up_down_12bit - Behavioral
+-- Project Name: 
+-- Target Devices: 
+-- Tool Versions: 
+-- Description: 
+-- 
+-- Dependencies: 
+-- 
+-- Revision:
+-- Revision 0.01 - File Created
+-- Additional Comments:
+-- 
+----------------------------------------------------------------------------------
 
 library ieee;
   use ieee.std_logic_1164.all;
@@ -24,7 +26,7 @@ library ieee;
 -- Entity declaration for N-bit counter
 ----------------------------------------------------------
 
-entity cnt_up_down_12 is
+entity cnt_up_down_12bit is
   generic (
     g_CNT_WIDTH : natural := 12 --! Default number of counter bits
   );
@@ -32,18 +34,18 @@ entity cnt_up_down_12 is
     clk    : in    std_logic; --! Main clock
     rst    : in    std_logic; --! Synchronous reset
     en     : in    std_logic; --! Enable input
-    cnt_up : in    std_logic; --! Direction of the counter (1 @ UP, 0 @ DOWN)
-    cnt    : out   std_logic_vector(g_CNT_WIDTH - 1 downto 0) --! Counter value
+    cnt_up : in    std_logic; --! Direction of the counter
+    cnt    : out   std_logic_vector(g_CNT_WIDTH - 1 downto 0)
   );
-end entity cnt_up_down_12;
+end entity cnt_up_down_12bit;
 
 ----------------------------------------------------------
 -- Architecture body for N-bit counter
 ----------------------------------------------------------
 
-architecture behavioral of cnt_up_down_12 is
+architecture behavioral of cnt_up_down_12bit is
 
-  signal sig_cnt : unsigned(g_CNT_WIDTH - 1 downto 0) := (others => '0'); --! Local counter
+  signal sig_cnt : unsigned(g_CNT_WIDTH - 1 downto 0); --! Local counter
 
 begin
 
@@ -52,23 +54,23 @@ begin
   -- Clocked process with synchronous reset which implements
   -- n-bit up/down counter.
   --------------------------------------------------------
-  p_cnt_up_down_12 : process (clk) is
+  p_cnt_up_down_12bit : process (clk) is
   begin
 
     if rising_edge(clk) then
       if (rst = '1') then           -- Synchronous reset
         sig_cnt <= (others => '0'); -- Clear all bits
       elsif (en = '1') then         -- Test if counter is enabled
-
-        -- TEST COUNTER DIRECTION
-       if cnt_up = '1' then
-          sig_cnt <= sig_cnt + 1;
-       else sig_cnt <= sig_cnt - 1;
+        -- HERE COUNTER DIRECTION TEST
+        if (cnt_up = '1') then
+            sig_cnt <= sig_cnt + 1;
+        else 
+            sig_cnt <= sig_cnt - 1;
+        end if;
       end if;
     end if;
-    end if;
 
-  end process p_cnt_up_down_12;
+  end process p_cnt_up_down_12bit;
 
   -- Output must be retyped from "unsigned" to "std_logic_vector"
   cnt <= std_logic_vector(sig_cnt);

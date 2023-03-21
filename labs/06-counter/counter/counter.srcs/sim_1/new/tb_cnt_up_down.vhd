@@ -1,14 +1,23 @@
-----------------------------------------------------------
---
--- Testbench for N-bit Up/Down binary counter.
--- Nexys A7-50T, xc7a50ticsg324-1L
--- TerosHDL, Vivado v2020.2, EDA Playground
---
--- Copyright (c) 2020 Tomas Fryza
--- Dept. of Radio Electronics, Brno Univ. of Technology, Czechia
--- This work is licensed under the terms of the MIT license.
---
-----------------------------------------------------------
+----------------------------------------------------------------------------------
+-- Company: 
+-- Engineer: 
+-- 
+-- Create Date: 03/15/2023 03:25:43 PM
+-- Design Name: 
+-- Module Name: tb_cnt_up_down - Behavioral
+-- Project Name: 
+-- Target Devices: 
+-- Tool Versions: 
+-- Description: 
+-- 
+-- Dependencies: 
+-- 
+-- Revision:
+-- Revision 0.01 - File Created
+-- Additional Comments:
+-- 
+----------------------------------------------------------------------------------
+
 
 library ieee;
   use ieee.std_logic_1164.all;
@@ -28,7 +37,7 @@ end entity tb_cnt_up_down;
 architecture testbench of tb_cnt_up_down is
 
   -- Number of bits for testbench counter
-  constant c_CNT_WIDTH         : natural := 5;
+  constant c_CNT_WIDTH         : natural := 3;
   constant c_CLK_100MHZ_PERIOD : time    := 10 ns;
 
   -- Local signals

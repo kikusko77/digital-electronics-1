@@ -1,19 +1,23 @@
-----------------------------------------------------------
---
---! @title Clock enable
---! @author Tomas Fryza
---! Dept. of Radio Electronics, Brno Univ. of Technology, Czechia
---!
---! @copyright (c) 2019 Tomas Fryza
---! This work is licensed under the terms of the MIT license
---!
---! Generates clock enable signal according to the number
---! of clock pulses `g_MAX`.
---
--- Hardware: Nexys A7-50T, xc7a50ticsg324-1L
--- Software: TerosHDL, Vivado 2020.2, EDA Playground
---
-----------------------------------------------------------
+----------------------------------------------------------------------------------
+-- Company: 
+-- Engineer: 
+-- 
+-- Create Date: 19.03.2023 17:08:27
+-- Design Name: 
+-- Module Name: clock_enable_12bit - Behavioral
+-- Project Name: 
+-- Target Devices: 
+-- Tool Versions: 
+-- Description: 
+-- 
+-- Dependencies: 
+-- 
+-- Revision:
+-- Revision 0.01 - File Created
+-- Additional Comments:
+-- 
+----------------------------------------------------------------------------------
+
 
 library ieee;
   use ieee.std_logic_1164.all;
@@ -23,7 +27,7 @@ library ieee;
 -- Entity declaration for clock enable
 ----------------------------------------------------------
 
-entity clock_enable_12 is
+entity clock_enable_12bit is
   generic (
     g_MAX : natural := 5 --! Number of clk pulses to generate one enable signal period
   );                       -- Note that there IS a semicolon between generic and port sections
@@ -32,13 +36,13 @@ entity clock_enable_12 is
     rst : in    std_logic; --! High-active synchronous reset
     ce  : out   std_logic  --! Clock enable pulse signal
   );
-end entity clock_enable_12;
+end entity clock_enable_12bit;
 
 ------------------------------------------------------------
 -- Architecture body for clock enable
 ------------------------------------------------------------
 
-architecture behavioral of clock_enable_12 is
+architecture behavioral of clock_enable_12bit is
 
   -- Local counter
   signal sig_cnt : natural;
@@ -50,7 +54,7 @@ begin
   -- Generate clock enable signal. By default, enable signal
   -- is low and generated pulse is always one clock long.
   --------------------------------------------------------
-  p_clk_enable_12 : process (clk) is
+  p_clk_enable_12bit : process (clk) is
   begin
 
     if rising_edge(clk) then              -- Synchronous process
@@ -68,6 +72,7 @@ begin
       end if;
     end if;
 
-  end process p_clk_enable_12;
+  end process p_clk_enable_12bit;
 
 end architecture behavioral;
+

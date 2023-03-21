@@ -1,14 +1,25 @@
+----------------------------------------------------------------------------------
+-- Company: 
+-- Engineer: 
+-- 
+-- Create Date: 03/15/2023 03:11:12 PM
+-- Design Name: 
+-- Module Name: tb_clock_enable - Behavioral
+-- Project Name: 
+-- Target Devices: 
+-- Tool Versions: 
+-- Description: 
+-- 
+-- Dependencies: 
+-- 
+-- Revision:
+-- Revision 0.01 - File Created
+-- Additional Comments:
+-- 
+----------------------------------------------------------------------------------
 ----------------------------------------------------------
---
--- Testbench for clock enable circuit.
--- Nexys A7-50T, xc7a50ticsg324-1L
--- TerosHDL, Vivado v2020.2, EDA Playground
---
--- Copyright (c) 2020 Tomas Fryza
--- Dept. of Radio Electronics, Brno Univ. of Technology, Czechia
--- This work is licensed under the terms of the MIT license.
---
 ----------------------------------------------------------
+
 
 library ieee;
   use ieee.std_logic_1164.all;
@@ -27,7 +38,7 @@ end entity tb_clock_enable;
 
 architecture testbench of tb_clock_enable is
 
-  constant c_MAX               : natural := 5;
+  constant c_MAX               : natural := 10;
   constant c_CLK_100MHZ_PERIOD : time    := 10 ns;
 
   -- Local signals
@@ -102,3 +113,4 @@ begin
   end process p_stimulus;
 
 end architecture testbench;
+

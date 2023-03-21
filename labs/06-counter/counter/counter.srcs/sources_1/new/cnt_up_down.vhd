@@ -1,20 +1,24 @@
-----------------------------------------------------------
---
---! @title N-bit Up/Down binary counter
---! @author Tomas Fryza
---! Dept. of Radio Electronics, Brno Univ. of Technology, Czechia
---!
---! @copyright (c) 2019 Tomas Fryza
---! This work is licensed under the terms of the MIT license
---!
---! Implementation of bidirectional N-bit counter. Number
---! of bits is set by `g_CNT_WIDTH` and counting direction
---! by `cnt_up` input.
---
--- Hardware: Nexys A7-50T, xc7a50ticsg324-1L
--- Software: TerosHDL, Vivado 2020.2, EDA Playground
---
-----------------------------------------------------------
+----------------------------------------------------------------------------------
+-- Company: 
+-- Engineer: 
+-- 
+-- Create Date: 03/15/2023 03:25:06 PM
+-- Design Name: 
+-- Module Name: cnt_up_down - Behavioral
+-- Project Name: 
+-- Target Devices: 
+-- Tool Versions: 
+-- Description: 
+-- 
+-- Dependencies: 
+-- 
+-- Revision:
+-- Revision 0.01 - File Created
+-- Additional Comments:
+-- 
+----------------------------------------------------------------------------------
+
+
 
 library ieee;
   use ieee.std_logic_1164.all;
@@ -60,13 +64,16 @@ begin
         sig_cnt <= (others => '0'); -- Clear all bits
       elsif (en = '1') then         -- Test if counter is enabled
 
-        -- TEST COUNTER DIRECTION
-       if cnt_up = '1' then
+        -- TEST COUNTER DIRECTION HERE
+
+        if (cnt_up = '1') then
           sig_cnt <= sig_cnt + 1;
-       else sig_cnt <= sig_cnt - 1;
+        else
+          sig_cnt <= sig_cnt - 1;
+        end if;
       end if;
     end if;
-    end if;
+
 
   end process p_cnt_up_down;
 
